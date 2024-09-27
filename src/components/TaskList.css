@@ -1,0 +1,27 @@
+/* Styling for the Edit and Delete buttons */
+.edit-btn {
+    background-color: yellow;
+    color: black;
+    margin-right: 10px;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .delete-btn {
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Optional: Add hover effect */
+  .edit-btn:hover {
+    background-color: gold;
+  }
+  
+  .delete-btn:hover {
+    background-color: darkred;
+  }
+  

@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import TaskList from './components/TaskList';
+import TaskForm from './components/TaskForm';
 
-function App() {
+const App = () => {
+  const [tasks, setTasks] = useState([]);
+  const [currentTask, setCurrentTask] = useState(null);
+
+  const handleSave = (task) => {
+    if (task.id) {
+      // Update task
+      setTasks(
+        tasks.map((t) => (t.id === task.id ? task : t))
+      );
+    } else {
+      // Add new task
+      task.id = Date.now(); // Generate a simple unique ID
+      setTasks([...tasks, task]);
+    }
+    setCurrentTask(null); // Reset after saving
+  };
+
+  const handleEdit = (task) => {
+    setCurrentTask(task);
+  };
+
+  const handleDelete = (id) => {
+    setTasks(tasks.filter((task) => task.id !== id));
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>To-Do List Application</h1>
+      <TaskForm currentTask={currentTask} onSave={handleSave} />
+      <TaskList tasks={tasks} onEdit={handleEdit} onDelete={handleDelete} />
     </div>
   );
-}
+};
 
 export default App;
